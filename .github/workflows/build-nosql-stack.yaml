@@ -2,7 +2,7 @@ name: oci-terraform-build-stack
 on:
   push:
     tags:
-      - "v*"
+      - "livelab-XXX-v*"
     paths:
       - 'oci-resource-manager-terraform-scripts/*'
       - '.github/workflows/build-nosql-stack.yaml'      
