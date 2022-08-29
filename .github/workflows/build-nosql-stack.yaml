@@ -3,6 +3,9 @@ on:
   push:
     tags:
       - "v*"
+    paths:
+      - 'NoSQL/ce/*'
+      - '.github/workflows/build-nosql-stack.yaml'      
 jobs:
   build-stack:
     name: Build Stack
@@ -14,7 +17,8 @@ jobs:
 
       - name: 'Build Stack'
         run: |
-          zip -r stack.zip *
+          cd oci-resource-manager-terraform-scripts
+          zip -r ../stack.zip *
       - name: 'Publish Stack'
         uses: actions/upload-artifact@v2-preview
         with:
