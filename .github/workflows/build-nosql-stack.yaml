@@ -34,7 +34,7 @@ jobs:
           tag_name: livelab-XXX-latest
           release_name: Release livelab-XXX-latest
           body: |
-            This is generated from the workflow build-nosql-stack.yaml
+            This release is generated from the workflow build-nosql-stack.yaml
           draft: false
           prerelease: false
 
