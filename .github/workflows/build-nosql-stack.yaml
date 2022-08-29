@@ -6,8 +6,6 @@ on:
       - '.github/workflows/build-nosql-stack.yaml'      
     branches:
       - master
-    tags:
-      - "livelab-XXX-v*"
 jobs:
   build-stack:
     name: Build Stack
@@ -33,15 +31,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          tag_name: ${{github.ref}}
-          release_name: Release ${{github.ref}}
+          tag_name: livelab-XXX-latest
+          release_name: Release livelab-XXX-latest
           body: |
-            Latest release
+            This is generated from the workflow build-nosql-stack.yaml
           draft: false
           prerelease: false
 
       - name: 'Upload Release Asset (Stack)'
-        if: contains(github.ref, 'v')
         id: upload-release-asset-stack
         uses: actions/upload-release-asset@v1
         env:
