@@ -6,7 +6,7 @@ on:
       - '.github/workflows/build-nosql-stack.yaml'      
 jobs:
   build-stack:
-    name: Build Stack zip file
+    name: Build Stack zip files
     runs-on: ubuntu-latest
     steps:
 
