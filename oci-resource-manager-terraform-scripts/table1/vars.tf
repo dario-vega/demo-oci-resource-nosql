@@ -3,5 +3,5 @@ variable compartment_ocid {  }
 variable "tenancy_ocid" {}
 
 variable "always_free" {
-  default = "false"
+  default = "true"
 }
