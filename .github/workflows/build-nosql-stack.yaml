@@ -2,7 +2,7 @@ name: oci-terraform-build-stack
 on:
   push:
     paths:
-      - 'oci-resource-manager-terraform-scripts/*'
+      - 'oci-resource-manager-terraform-scripts/*/*'
       - '.github/workflows/build-nosql-stack.yaml'      
 jobs:
   build-stack:
