@@ -1,7 +1,7 @@
 ## Copyright © 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
-    title: "Demo OCI Resource Manager with Oracle NoSQL Database Cloud Service"
+    title: "Demo OCI Resource Manager with Oracle NoSQL Database Cloud Service - Table1"
     description: "Demo OCI Resource Manager with Oracle NoSQL Database Cloud Service"
     informationalText: "Modern apps benefit from predictable low latency, flexibility, and horizontal scale-out of NoSQL databases. Join us to learn how effortless it is to develop a modern app using Oracle Cloud Infrastructure and Oracle NoSQL Database Cloud Service. This lab is based on data from an airline baggage tracking app"
     instructions: "Please choose the region Phoenix and Choose "
