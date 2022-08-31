@@ -8,7 +8,7 @@ on:
       - master
 jobs:
   build-stack:
-    name: Build Stack
+    name: Build terraform Stack zip file
     runs-on: ubuntu-latest
     steps:
 
