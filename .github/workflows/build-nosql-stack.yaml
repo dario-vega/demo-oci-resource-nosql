@@ -4,11 +4,9 @@ on:
     paths:
       - 'oci-resource-manager-terraform-scripts/*'
       - '.github/workflows/build-nosql-stack.yaml'      
-    branches:
-      - master
 jobs:
   build-stack:
-    name: Build Stack
+    name: Build Stack zip file
     runs-on: ubuntu-latest
     steps:
 
