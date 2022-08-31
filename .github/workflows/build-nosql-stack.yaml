@@ -1,8 +1,6 @@
 name: oci-terraform-build-stack
 on:
   push:
-    branches:
-      - master
     paths:
       - 'oci-resource-manager-terraform-scripts/*'
       - '.github/workflows/build-nosql-stack.yaml'      
