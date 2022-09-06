@@ -15,12 +15,13 @@ jobs:
 
       - name: 'Build Stack'
         run: |
-          zip -r ./stack.zip oci-resource-manager-terraform-scripts/*
+          zip -r ./stack1.zip oci-resource-manager-terraform-scripts/*
+          zip -r ./stack2.zip oci-resource-manager-terraform-scripts/*
       - name: 'Publish Stack'
-        uses: actions/upload-artifact@v2-preview
+        uses: actions/upload-artifact@v3
         with:
           name: 'stack'
-          path: 'stack.zip'
+          path: '*.zip'
 
       - name: 'Create Release'
         if: success()
@@ -49,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: ./stack.zip
+          asset_path: ./stack*.zip
           asset_name: stack.zip
           asset_content_type: application/zip
           
