@@ -26,7 +26,6 @@ jobs:
         if: success()
         id: create_release
         uses: actions/create-release@v1
-        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
@@ -36,7 +35,13 @@ jobs:
             This release is generated from the workflow build-nosql-stack.yaml
           draft: false
           prerelease: false
-
+          allowUpdates: true
+      
+      - name: Load Release URL File from release job
+        uses: actions/download-artifact@v1
+        with:
+          name: Release livelab-XXX-latest
+        
       - name: 'Upload Release Asset (Stack)'
         id: upload-release-asset-stack
         uses: actions/upload-release-asset@v1
