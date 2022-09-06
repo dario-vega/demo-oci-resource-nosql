@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v1
         id: read_release
         with:
-          name: Release livelab-XXX-latest
+          name: stack.zip
         
       - name: 'Upload Release Asset (Stack)'
         id: upload-release-asset-stack
