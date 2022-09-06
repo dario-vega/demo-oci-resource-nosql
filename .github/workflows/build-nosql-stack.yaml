@@ -3,7 +3,8 @@ on:
   push:
     paths:
       - 'oci-resource-manager-terraform-scripts/*/*'
-      - '.github/workflows/build-nosql-stack.yaml'      
+      - '.github/workflows/build-nosql-stack.yaml'
+  workflow_dispatch:     
 jobs:
   build-stack:
     name: Build Stack zip files
