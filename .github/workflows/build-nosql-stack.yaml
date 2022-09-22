@@ -20,11 +20,13 @@ jobs:
       - name: 'Publish Stack 1'
         uses: actions/upload-artifact@v3
         with:
+          name: stack1
           path: 'stack1.zip'
 
       - name: 'Publish Stack 2'
         uses: actions/upload-artifact@v3
         with:
+          name: stack2
           path: 'stack2.zip'
           
       - name: 'Create Release'
@@ -46,14 +48,14 @@ jobs:
         run: |
           echo ${{steps.create_release.outputs.upload_url}}
         
-      - name: 'Upload Release Asset (Stack)'
+      - name: 'Upload Release Asset (Stack 1)'
         id: upload-release-asset-stack
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           upload_url: ${{steps.create_release.outputs.upload_url}}
-          asset_path: ./stack*.zip
-          asset_name: stack.zip
+          asset_path: ./stack1.zip
+          asset_name: stack1.zip
           asset_content_type: application/zip
           
