@@ -1,6 +1,6 @@
 # demo-oci-resource-nosql
 
-Modifying for test with workflow
+Modifying for test with workflow v2
 
 ## Using Latest Release
 
