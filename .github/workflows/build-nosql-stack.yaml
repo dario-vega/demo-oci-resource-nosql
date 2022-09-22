@@ -19,6 +19,7 @@ jobs:
           zip -r ./stack2.zip oci-resource-manager-terraform-scripts/table2/*
           
       - name: Commit and Push Changes
+        continue-on-error: true
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git config --global user.name "dario-vega"
