@@ -24,7 +24,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git config --global user.name "dario-vega"
             git config --global user.email "dario-vega@oracle.com"
-            git pull origin main
+            #git pull origin main
             git add ./stack*.zip
             git commit -m "Added - zip files"
             git push
