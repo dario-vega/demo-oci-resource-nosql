@@ -15,6 +15,7 @@ jobs:
 
       - name: 'Build Stack'
         run: |
+          rm -r ./stack*.zip
           zip -r ./stack1.zip oci-resource-manager-terraform-scripts/table1/*
           zip -r ./stack2.zip oci-resource-manager-terraform-scripts/table2/*
           
