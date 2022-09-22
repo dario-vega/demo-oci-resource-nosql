@@ -15,8 +15,8 @@ jobs:
 
       - name: 'Build Stack'
         run: |
-          zip -r ./stack1.zip oci-resource-manager-terraform-scripts/*
-          zip -r ./stack2.zip oci-resource-manager-terraform-scripts/*
+          zip -r ./stack1.zip oci-resource-manager-terraform-scripts/table1/*
+          zip -r ./stack2.zip oci-resource-manager-terraform-scripts/table2/*
       - name: 'Publish Stack 1'
         uses: actions/upload-artifact@v3
         with:
@@ -49,7 +49,7 @@ jobs:
           echo ${{steps.create_release.outputs.upload_url}}
         
       - name: 'Upload Release Asset (Stack 1)'
-        id: upload-release-asset-stack
+        id: upload-release-asset-stack-1
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -57,5 +57,16 @@ jobs:
           upload_url: ${{steps.create_release.outputs.upload_url}}
           asset_path: ./stack1.zip
           asset_name: stack1.zip
+          asset_content_type: application/zip
+          
+      - name: 'Upload Release Asset (Stack 2)'
+        id: upload-release-asset-stack-2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: ./stack2.zip
+          asset_name: stack2.zip
           asset_content_type: application/zip
           
