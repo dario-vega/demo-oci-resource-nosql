@@ -17,6 +17,20 @@ jobs:
         run: |
           zip -r ./stack1.zip oci-resource-manager-terraform-scripts/table1/*
           zip -r ./stack2.zip oci-resource-manager-terraform-scripts/table2/*
+          
+      - name: Commit and Push Changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.name "dario-vega"
+            git config --global user.email "dario-vega@oracle.com"
+            git pull origin main
+            git add ./stack*.zip
+            git commit -m "Added - zip files"
+            git push
+          else
+            echo "No changes!";
+          fi          
+          
       - name: 'Publish Stack 1'
         uses: actions/upload-artifact@v3
         with:
