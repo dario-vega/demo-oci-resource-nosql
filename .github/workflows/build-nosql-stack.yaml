@@ -17,12 +17,16 @@ jobs:
         run: |
           zip -r ./stack1.zip oci-resource-manager-terraform-scripts/*
           zip -r ./stack2.zip oci-resource-manager-terraform-scripts/*
-      - name: 'Publish Stack'
+      - name: 'Publish Stack 1'
         uses: actions/upload-artifact@v3
         with:
-          name: 'stack'
-          path: '*.zip'
+          path: 'stack1.zip'
 
+      - name: 'Publish Stack 2'
+        uses: actions/upload-artifact@v3
+        with:
+          path: 'stack2.zip'
+          
       - name: 'Create Release'
         if: success()
         id: create_release
@@ -37,7 +41,6 @@ jobs:
             This release is generated from the workflow build-nosql-stack.yaml
           draft: false
           prerelease: false
-          allowUpdates: true
       
       - name: print
         run: |
