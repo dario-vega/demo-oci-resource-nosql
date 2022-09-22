@@ -1,5 +1,8 @@
 name: oci-terraform-build-stack
 on:
+  push:
+    tags:
+      - "livelab-*"
   workflow_dispatch:     
 jobs:
   build-stack:
@@ -48,8 +51,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          tag_name: livelab-XXX-latest
-          release_name: Release livelab-XXX-latest
+          tag_name: livelab-XXX
+          release_name: Release livelab-XXX
           body: |
             This release is generated from the workflow build-nosql-stack.yaml
           draft: false
