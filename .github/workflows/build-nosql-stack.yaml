@@ -1,9 +1,5 @@
 name: oci-terraform-build-stack
 on:
-  push:
-    paths:
-      - 'oci-resource-manager-terraform-scripts/*/*'
-      - '.github/workflows/build-nosql-stack.yaml'
   workflow_dispatch:     
 jobs:
   build-stack:
@@ -43,17 +39,6 @@ jobs:
         with:
           name: stack2
           path: 'stack2.zip'
- 
-      - name: 'Delete Release'
-        if: success()
-        id: delete_release
-        uses: actions/delete-release@v1
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          tag_name: livelab-XXX-latest
-          release_name: Release livelab-XXX-latest
  
       - name: 'Create Release'
         if: success()
