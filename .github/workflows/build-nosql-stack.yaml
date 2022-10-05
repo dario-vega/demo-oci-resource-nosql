@@ -11,13 +11,16 @@ jobs:
 
       - name: 'Build Stack'
         run: |
+          mkdir -p zips
           rm -rf zips/*.zip
-          FOLDERS=$(ls -1d demo-livelab/*/ )
+          cd demo-livelab
+          FOLDERS=$(ls -1d */ )
           for EXAMPLE_FOLDER in $FOLDERS;
           do
-            RESOURCE=$(cut -d "/" -f 2 <<< "$EXAMPLE_FOLDER")
-            zip -r zips/$RESOURCE.zip $EXAMPLE_FOLDER
+            RESOURCE=$(cut -d "/" -f 1 <<< "$EXAMPLE_FOLDER")
+            zip -r ../zips/$RESOURCE.zip $EXAMPLE_FOLDER
           done
+          cd ..
   
       - name: Commit and Push Changes
         continue-on-error: true
