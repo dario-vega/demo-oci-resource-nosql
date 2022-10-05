@@ -1,0 +1,91 @@
+name: oci-terraform-build-stack
+on:
+  push:
+    tags:
+      - "livelab-*"
+  workflow_dispatch:     
+jobs:
+  build-stack:
+    name: Build Stack zip files
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+
+      - name: 'Build Stack'
+        run: |
+          rm -rf zips/*.zip
+          FOLDERS=$(ls -1d demo-livelab/*/ )
+          for EXAMPLE_FOLDER in $FOLDERS;
+          do
+            RESOURCE=$(cut -d "/" -f 2 <<< "$EXAMPLE_FOLDER")
+            zip -r zips/$RESOURCE.zip $EXAMPLE_FOLDER
+          done
+  
+      - name: Commit and Push Changes
+        continue-on-error: true
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.name "dario-vega"
+            git config --global user.email "dario-vega@oracle.com"
+            git pull origin main
+            git add zips/*.zip
+            git commit -m "Added - zip files"
+            git push
+          else
+            echo "No changes!";
+          fi          
+          
+      - name: 'Publish Stack 1'
+        uses: actions/upload-artifact@v3
+        with:
+          name: stack1
+          path: 'stack1.zip'
+
+      - name: 'Publish Stack 2'
+        uses: actions/upload-artifact@v3
+        with:
+          name: stack2
+          path: 'stack2.zip'
+ 
+      - name: 'Create Release'
+        if: success()
+        id: create_release
+        uses: actions/create-release@v1
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: livelab-XXX
+          release_name: Release livelab-XXX
+          body: |
+            This release is generated from the workflow build-nosql-stack.yaml
+          draft: false
+          prerelease: false
+      
+      - name: print
+        run: |
+          echo ${{steps.create_release.outputs.upload_url}}
+        
+      - name: 'Upload Release Asset (Stack 1)'
+        id: upload-release-asset-stack-1
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: ./stack1.zip
+          asset_name: stack1.zip
+          asset_content_type: application/zip
+          
+      - name: 'Upload Release Asset (Stack 2)'
+        id: upload-release-asset-stack-2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: ./stack2.zip
+          asset_name: stack2.zip
+          asset_content_type: application/zip
+          
