@@ -21,6 +21,14 @@ jobs:
             zip -r ../zips/$RESOURCE.zip $EXAMPLE_FOLDER
           done
           cd ..
+          FOLDERS=$(ls -1 -d examples-nosql-*/*/ )
+          for EXAMPLE_FOLDER in $FOLDERS;
+          do
+            RESOURCE=$(cut -d "/" -f 2 <<< "$EXAMPLE_FOLDER")
+            if [ -f "$EXAMPLE_FOLDER/zip" ]; then 
+              zip zips/$RESOURCE.zip $EXAMPLE_FOLDER
+            fi
+          done          
   
       - name: Commit and Push Changes
         continue-on-error: true
